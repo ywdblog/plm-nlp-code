@@ -2,6 +2,8 @@ import torch
 from torch import nn, optim
 import torch.nn.functional as F
 
+# 多层感知机模型
+
 # 1：线性层 full-connected layer
 # 实现一个线性回归模型 y = wx + b 
 liner = nn.Linear(32, 1)
@@ -9,7 +11,6 @@ input = torch.rand(3, 32)
 output = liner(input)
 print(output.shape, liner.weight.shape, liner.bias.shape)
 print(output)
-
 
 # 2：激活函数-Sigmoid函数
  
@@ -30,7 +31,6 @@ print("sum:",output.sum()) # softmax函数的输出和为1
 x = torch.tensor([-1.0, 2.0, -3.0, 4.0])
 output = F.relu(x)
 print("Relu：",output)  # Relu函数的输出大于0，小于0的部分为0 
-
 
 # 5：一个使用PyTorch实现逻辑回归的线性层的示例代码
 
