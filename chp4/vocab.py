@@ -1,7 +1,9 @@
 # Defined in Section 4.6.1
 
+import sys
 from collections import defaultdict, Counter
 
+# 词表映射
 class Vocab:
     def __init__(self, tokens=None):
         self.idx_to_token = list()
@@ -18,12 +20,17 @@ class Vocab:
     @classmethod
     def build(cls, text, min_freq=1, reserved_tokens=None):
         token_freqs = defaultdict(int)
+
+ 
         for sentence in text:
             for token in sentence:
                 token_freqs[token] += 1
         uniq_tokens = ["<unk>"] + (reserved_tokens if reserved_tokens else [])
+
+        # 将频率大于或等于最小频率且不等于"<unk>"的令牌添加到uniq_tokens列表中。
         uniq_tokens += [token for token, freq in token_freqs.items() \
                         if freq >= min_freq and token != "<unk>"]
+  
         return cls(uniq_tokens)
 
     def __len__(self):

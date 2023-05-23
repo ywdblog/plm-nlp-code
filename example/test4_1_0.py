@@ -2,7 +2,7 @@ import torch
 from torch import nn, optim
 import torch.nn.functional as F
 
-# 多层感知机模型
+# 第四章：多层感知机模型
 
 # 1：线性层 full-connected layer
 # 实现一个线性回归模型 y = wx + b 

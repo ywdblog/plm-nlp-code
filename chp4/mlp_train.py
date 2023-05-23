@@ -9,6 +9,7 @@ class MLP(nn.Module):
         self.activate = F.relu
         self.linear2 = nn.Linear(hidden_dim, num_class)
 
+    #forward函数定义了模型的前向传播过程，输入为x，输出为log_probs
     def forward(self, inputs):
         hidden = self.linear1(inputs)
         activation = self.activate(hidden)

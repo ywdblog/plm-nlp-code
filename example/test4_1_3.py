@@ -1,6 +1,8 @@
 from torch import nn
 import  torch 
 
+# 第四章：transformer
+
 # d_model: 输入和输出的维度 ，nhead: 多头注意力的头数
 encoder_layer = nn.TransformerEncoderLayer(d_model=4, nhead=2)
 

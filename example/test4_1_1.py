@@ -1,6 +1,6 @@
 import torch 
 
-# CNN 卷积神经网络
+# 第四章：CNN 卷积神经网络
 
 from torch.nn import Conv1d 
 from torch.nn import MaxPool1d
