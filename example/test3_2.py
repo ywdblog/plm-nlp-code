@@ -36,8 +36,8 @@ print("向量点积：",torch.dot(x,y)) # 1*4+2*5+3*6，作用是求向量的内
 x = torch.tensor([[1,2,3],[4,5,6]] ,dtype=torch.float32) #(2,3)
 print("张量x（平均数）：",x.mean()) # 所有元素的平均数 
 print("张量x（最大值）：",x.max()) # 所有元素的最大值
-print(x.mean(dim=0)) # 按列求平均值 按着第1维度求平均值（列）,按着第1维运算，其它维度不变 tensor([2.5000, 3.5000, 4.5000])
-print(x.mean(dim=1)) # 按行求平均值 按着第2维度求平均值（行）,按着第1维运算，其它维度不变 tensor([2., 5.])
+print(x.mean(dim=0)) # 按列求平均值 按着第1维度求平均值（列）,其它维度不变 tensor([2.5000, 3.5000, 4.5000])
+print(x.mean(dim=1)) # 按行求平均值 按着第2维度求平均值（行）,其它维度不变 tensor([2., 5.])
 print(x.mean(dim=1,keepdim = True)) #  为了保持原有的维度 (2,1) tensor([[2.],[5.]])
 
 # 4：张量的基本运算-cat 
@@ -96,7 +96,7 @@ except Exception as e:
     sliced_x = sliced_x.reshape(4) # 调整张量形状为4 
     print("调整后：",sliced_x)
 
-# （3）transpose 操作 只能对2维张量进行操作
+#（3）transpose 操作 只能对2维张量进行操作
 
 x = torch.tensor([[1,2,3],[4,5,6]] ,dtype=torch.float32) # (2,3) 
 x.transpose(0,1) # 转置操作，交换0维和1维的位置，结果为(3,2)
@@ -104,7 +104,8 @@ x.transpose(0,1) # 转置操作，交换0维和1维的位置，结果为(3,2)
 # （4）permute 操作 可以对多维张量进行操作
 x = torch.tensor([[[1,2,3],[4,5,6]]] ,dtype=torch.float32) # (2,3) 
 print(x.shape) #  (1,2,3)
-print(x.permute(2,0,1))  
+y = x.permute(2,0,1)
+print(y,y.shape)  
 
 # 6：广播机制
 
@@ -116,7 +117,6 @@ x = torch.arange(1,4).view(3,1)
 y = torch.arange(1,3).view(1,2)
 print("广播：",x+y) #计算前，先将x和y的形状调整为相同的形状(3,2)，然后再进行计算  
 
-
 # 7：张量的索引和切片
 
 x = torch.arange(12).view(3,4)
@@ -125,11 +125,10 @@ print(x[:,1])
 
 # 8：张量的升维和降维
 
-
 x = torch.tensor([1,2,3,4])
 # 升维
 y = torch.unsqueeze(x,dim=0) # 在第0维增加一个维度
-print ("升维：",x.shape,y.shape,y)
+print ("升维：",x.shape,y.shape,y) # torch.Size([4]) torch.Size([1, 4]) tensor([[1, 2, 3, 4]])
 
 # 降维
 z = torch.squeeze(y,dim=0) # 去掉第dim维的维度
@@ -139,4 +138,4 @@ print ("降维：",y.shape,z.shape)
 x = torch.ones(3,4,1)
 print(x,x.shape)
 z = torch.squeeze(x,dim=2) #只在维度为2的地方进行降维，且它的维度为1，非1的维度不会进行降维
-print(z,z.shape)
+print(z,z.shape) # torch.Size([3, 4])

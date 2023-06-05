@@ -41,38 +41,7 @@ import torch
 
 # print(one_hot)
 
-# 3：词袋模型
-# 词袋模型是一种简单的文本表示方法，它将文本表示为一个向量，向量中的每个元素表示一个单词在文本中出现的次数
-# 词袋模型忽略了单词出现的顺序，因此无法表达单词之间的关系，也无法表达单词的相似性
-
-# import string
-
-# # 定义文本
-# text = "Hello, world! This is a sample text. Hello, world again!"
-
-# # 去除标点符号并转换为小写
-# text = text.translate(str.maketrans('', '', string.punctuation)).lower()
-
-# # 创建词汇表
-# words = text.split()
-# vocab = list(set(words))
-# vocab_size = len(vocab)
-
-# # 创建词汇表到索引的映射
-# word_to_index = {word: i for i, word in enumerate(vocab)}
-# print(word_to_index)
-
-# # 创建一个大小为 (1, vocab_size) 的全零张量
-# bag_of_words = torch.zeros(1, vocab_size)
-
-# # 将文本转换为词袋模型表示
-# for word in words:
-#     word_index = word_to_index[word]
-#     bag_of_words[0, word_index] += 1
-
-# print(bag_of_words)
-
-# 4：multi-hot 实现
+# 3：multi-hot 实现
 
 # import torch
 # import string
@@ -107,7 +76,7 @@ import torch
 
 # print(multi_hot)
 
-# 5：使用 torch 实现 multi_hot
+# 4：使用 torch 实现 multi_hot
 
 # import torch
 # from torch.nn.functional import one_hot
@@ -131,6 +100,37 @@ import torch
 # multi_hot = one_hot(torch.tensor(encoded_text), num_classes=len(vocab)).sum(dim=0)
 
 # print(multi_hot)
+
+# 5 ：词袋模型
+# 词袋模型是一种简单的文本表示方法，它将文本表示为一个向量，向量中的每个元素表示一个单词在文本中出现的次数
+# 词袋模型忽略了单词出现的顺序，因此无法表达单词之间的关系，也无法表达单词的相似性
+
+# import string
+
+# # 定义文本
+# text = "Hello, world! This is a sample text. Hello, world again!"
+
+# # 去除标点符号并转换为小写
+# text = text.translate(str.maketrans('', '', string.punctuation)).lower()
+
+# # 创建词汇表
+# words = text.split()
+# vocab = list(set(words))
+# vocab_size = len(vocab)
+
+# # 创建词汇表到索引的映射
+# word_to_index = {word: i for i, word in enumerate(vocab)}
+# print(word_to_index)
+
+# # 创建一个大小为 (1, vocab_size) 的全零张量
+# bag_of_words = torch.zeros(1, vocab_size)
+
+# # 将文本转换为词袋模型表示
+# for word in words:
+#     word_index = word_to_index[word]
+#     bag_of_words[0, word_index] += 1
+
+# print(bag_of_words)
 
 # 6：另外一个构建词袋模型的方法
 # - 构建词汇表

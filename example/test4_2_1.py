@@ -3,12 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 
-
-# Defined in Section 4.6.4 and 4.6.5 mlp_sent_polarity.py
-
 # 网络上的一个例子 
-
-
 
 # 定义自定义数据集
 class MyDataset(Dataset):

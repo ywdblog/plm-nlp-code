@@ -2,6 +2,7 @@ from torch import nn
 import  torch 
 
 # 第四章：transformer
+# 参考 transformer_sent_polarity.py
 
 # d_model: 输入和输出的维度 ，nhead: 多头注意力的头数
 encoder_layer = nn.TransformerEncoderLayer(d_model=4, nhead=2)

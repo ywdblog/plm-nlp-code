@@ -3,6 +3,7 @@ from torch import nn, optim
 import torch.nn.functional as F
 
 # 第四章：多层感知机模型
+# 参考 mlp_sent_polarity.py
 
 # 1：线性层 full-connected layer
 # 实现一个线性回归模型 y = wx + b 
@@ -30,9 +31,10 @@ print("sum:",output.sum()) # softmax函数的输出和为1
 
 x = torch.tensor([-1.0, 2.0, -3.0, 4.0])
 output = F.relu(x)
-print("Relu：",output)  # Relu函数的输出大于0，小于0的部分为0 
+print("Relu：",output)  # Relu函数的返回0和x中的较大值，小于0的部分为0 
 
 # 5：一个使用PyTorch实现逻辑回归的线性层的示例代码
+# logic regression 解决的是二分类问题
 
 import torch
 import torch.nn as nn

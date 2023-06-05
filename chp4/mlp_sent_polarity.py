@@ -1,4 +1,4 @@
-# Defined in Section 4.6.4 and 4.6.5
+# Defined in Section 4.6.4 and 4.6.5 mlp_sent_polarity.py
 
 import torch
 from torch import nn, optim
@@ -30,6 +30,7 @@ def collate_fn(examples):
 class MLP(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, num_class):
         super(MLP, self).__init__()
+        # EmbeddingBag
         self.embedding = nn.EmbeddingBag(vocab_size, embedding_dim)
         self.linear1 = nn.Linear(embedding_dim, hidden_dim)
         self.activate = F.relu

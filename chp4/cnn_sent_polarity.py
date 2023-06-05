@@ -8,6 +8,7 @@ from torch.nn.utils.rnn import pad_sequence
 from collections import defaultdict
 from vocab import Vocab
 from utils import load_sentence_polarity
+import sys 
 
 class CnnDataset(Dataset):
     def __init__(self, data):
@@ -28,11 +29,31 @@ class CNN(nn.Module):
     def __init__(self, vocab_size, embedding_dim, filter_size, num_filter, num_class):
         super(CNN, self).__init__()
         self.embedding = nn.Embedding(vocab_size, embedding_dim)
+ 
+
+        # filter_size 表示卷积核的大小（宽度）
+        # num_filter 表示卷积核的数量
+        # embedding_dim 表示词向量的维度
         self.conv1d = nn.Conv1d(embedding_dim, num_filter, filter_size, padding=1)
         self.activate = F.relu
         self.linear = nn.Linear(num_filter, num_class)
     def forward(self, inputs):
         embedding = self.embedding(inputs)
+        # embedding.permute 将张量的维度换位
+
+        '''
+        默认情况下，embedding的形状是[batch_size, sequence_length, embedding_dim] 
+        embedding.permute(0, 2, 1) 将其变为[batch_size, embedding_dim, sequence_length]
+        因为 nn.Conv1d要求输入的张量形状是[batch_size, in_channels, sequence_length]，in_channels对应于输入的特征维度
+
+        self.conv1d是一个nn.Conv1d层，它对输入进行一维卷积操作，卷积操作会在输入序列的维度上滑动一个固定大小的窗口（卷积核），并对窗口内的值进行加权和操作，生成卷积特征
+        这里使用self.activate函数（通常是ReLU函数）对卷积特征进行非线性激活。
+
+        F.max_pool1d(convolution, kernel_size=convolution.shape[2])对卷积特征进行一维最大池化操作
+        。最大池化操作会从卷积特征中提取每个通道的最大值，用于汇总该通道的特征信息。kernel_size参数指定池化窗口的大小，
+        这里使用convolution.shape[2]来动态设置池化窗口的大小，以确保窗口大小适应输入卷积特征的长度。
+        '''
+ 
         convolution = self.activate(self.conv1d(embedding.permute(0, 2, 1)))
         pooling = F.max_pool1d(convolution, kernel_size=convolution.shape[2])
         outputs = self.linear(pooling.squeeze(dim=2))
