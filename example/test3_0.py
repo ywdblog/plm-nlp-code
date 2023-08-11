@@ -11,10 +11,8 @@ import torch
 # one_hot = torch.eye(num_classes)[labels]  # 创建单位矩阵并选择对应的行
 
 
-# 定义输入数据
+# 定义输入数据 # 计算独热编码
 labels = torch.tensor([2, 0, 1, 2, 0])
-
-# 计算独热编码
 one_hot = torch.nn.functional.one_hot(labels)
 
 # print(one_hot)
